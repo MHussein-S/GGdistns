@@ -1,6 +1,6 @@
-Package: GFdistns
+Package: GGdistns
 Type: Package
-Title: Fitting the Generalized Families of Distributions
+Title: Fitting the Generalized-G Families of Distributions
 Version: 1.0
 Author: Mohamed Hussein
 Maintainer: <m.hussein@alexu.edu.eg>
