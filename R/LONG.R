@@ -47,7 +47,7 @@ pLONG<-function (q,par,distr, lower.tail = TRUE, log.p = FALSE )
   if (any(is.na(m)))
     stop("you specified invalid names of parameters for ",distr)
   G<-do.call(pdistname, c(list(q), as.list(distpar)))
-  p<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+  p<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
   if (!lower.tail)
     p <- 1 - p
   if (log.p)
@@ -77,7 +77,7 @@ qLONG<-function(p,par,distr,lower.tail=TRUE,log.p=FALSE)
     p<-exp(p)
   if (lower.tail==FALSE)
     p<-1-p
-  p<-exp(a*sqrt(2)*erfinv(2*p-1))/(1+exp(a*sqrt(2)*erfinv(2*p-1)))
+  p<-exp(a*sqrt(2)*pracma::erfinv(2*p-1))/(1+exp(a*sqrt(2)*pracma::erfinv(2*p-1)))
   q<-do.call(qdistname,c(list(p), as.list(distpar)))
   return(q)
 }
@@ -101,14 +101,14 @@ rLONG<-function(n,par,distr)
   if (any(is.na(m)))
     stop("you specified invalid names of parameters for ",distr)
   y<-runif(n)
-  y<-exp(a*sqrt(2)*erfinv(2*y-1))/(1+exp(a*sqrt(2)*erfinv(2*y-1)))
+  y<-exp(a*sqrt(2)*pracma::erfinv(2*y-1))/(1+exp(a*sqrt(2)*pracma::erfinv(2*y-1)))
   do.call(qdistname,c(list(y), as.list(distpar)))
 }
 
 mgofLONG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")
@@ -122,7 +122,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
       a<-parset$extrpar$a
       distpar<-parset$distpar
       G<-do.call(pdistname,c(list(data),as.list(distpar)))
-      theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+      theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
       n<-length(data)
       1/(12*n) + sum( ( theop - (2 * 1:n - 1)/(2 * n) )^2 )
     }
@@ -134,7 +134,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         obspu <- seq(1,n)/n
         obspl <- seq(0,n-1)/n
@@ -148,7 +148,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         - n - mean( (2 * 1:n - 1) * (log(theop) + log(1 - rev(theop))))
       }
@@ -160,7 +160,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         n/2 - 2 * sum(theop) - mean ( (2 * 1:n - 1) * log(1 - rev(theop)))
       }
@@ -172,7 +172,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         -3*n/2 + 2 * sum(theop) - mean ( (2 * 1:n - 1) * log(theop))
       }
@@ -184,7 +184,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         2 * sum(log(1 - theop)) + mean ( (2 * 1:n - 1) / (1 - rev(theop)))
       }
@@ -196,7 +196,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         2 * sum(log(theop)) + mean ( (2 * 1:n - 1) / theop )
       }
@@ -208,7 +208,7 @@ mgofLONG<- function (data, distr, start,gofs = "CvM")
         a<-parset$extrpar$a
         distpar<-parset$distpar
         G<-do.call(pdistname,c(list(data),as.list(distpar)))
-        theop<-1/2*(1+erf(1/(a*sqrt(2))*log(G/(1-G))))
+        theop<-1/2*(1+pracma::erf(1/(a*sqrt(2))*log(G/(1-G))))
         n<-length(data)
         2 * sum(log(theop) + log(1 - theop) ) + mean ( ((2 * 1:n - 1) / theop) + ((2 * 1:n - 1) / (1 - rev(theop))) )
       }

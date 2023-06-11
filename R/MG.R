@@ -54,7 +54,7 @@ pMG<-function (q,par,distr, lower.tail = TRUE, log.p = FALSE )
     p <- log(p)
   return(p)
 }
-qMG<-function(p,par,distr,lower=0,upper,lower.tail=TRUE,log.p=FALSE)
+qMG<-function(p,par,distr,lower = 0,upper = 1e5,lower.tail=TRUE,log.p=FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
     stop("'par' must be a named list")
@@ -86,7 +86,7 @@ qMG<-function(p,par,distr,lower=0,upper,lower.tail=TRUE,log.p=FALSE)
   res<-c()
   for (pi in p)
   {
-    uni <- uniroot(f=qfun, distpar=distpar,a=a,p=pi, pdistname=pdistname,f.lower = -pi,f.upper = pi,lower = lower,upper = upper)$root
+    uni <- uniroot(f=qfun, distpar=distpar,a=a,p=pi, pdistname=pdistname,f.lower = -pi,f.upper = pi,lower = lower,upper = upper,extendInt="yes")$root
     res<-c(res,uni)
   }
   return(res)
@@ -111,13 +111,13 @@ rMG<-function(n,par,distr)
   if (any(is.na(m)))
     stop("you specified invalid names of parameters for ",distr)
   y<-runif(n)
-  qMG(y, par=par,distr=distr,upper=10000)
+  qMG(y, par = par,distr = distr)
 }
 
 mgofMG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")

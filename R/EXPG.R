@@ -108,7 +108,7 @@ rEXPG<-function(n,par,distr)
 mgofEXPG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")

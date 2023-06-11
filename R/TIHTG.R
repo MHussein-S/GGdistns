@@ -1,4 +1,3 @@
-########## TIHTG ########################
 dTIHTG<-function (x,par,distr, log = FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
@@ -108,7 +107,7 @@ rTIHTG<-function(n,par,distr)
 mgofTIHTG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")
@@ -241,6 +240,3 @@ mgofTIHTG<- function (data, distr, start,gofs = "CvM")
   rownames(res3)=c("")
   list("Estimates"=res,"Measures"=res1,"Convergence Status"=res2, "Goodness-of-fit Statistic"=res3)
 }
-
-
-

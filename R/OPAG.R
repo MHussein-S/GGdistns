@@ -1,4 +1,3 @@
-########## OPAG ########################
 dOPAG<-function (x,par,distr, log = FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
@@ -117,8 +116,6 @@ setpar<-function(ddistname,allpar)
 {
   if(!is.list(allpar))
     allpar<- as.list(allpar)
-  if (!exists(ddistname, mode="function"))
-    stop(paste("The ", distr, " distribution is not defined"))
   args <- names(formals(ddistname))
   a<-allpar$a
   b<-allpar$b
@@ -128,13 +125,13 @@ setpar<-function(ddistname,allpar)
   distpar<-allpar[distparn]
   m <- match(distparn,args)
   if (any(is.na(m)))
-    stop("you specified invalid names of parameters for ",distr)
+    stop("you specified invalid names of parameters for ",ddistname)
   return(list(extrpar=extrpar,distpar=distpar))
 }
 mgofOPAG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")

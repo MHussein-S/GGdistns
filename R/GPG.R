@@ -113,28 +113,10 @@ rGPG<-function(n,par,distr)
   do.call(qdistname,c(list(y), as.list(distpar)))
 }
 
-setpar<-function(ddistname,allpar)
-{
-  if(!is.list(allpar))
-    allpar<- as.list(allpar)
-  if (!exists(ddistname, mode="function"))
-    stop(paste("The ", distr, " distribution is not defined"))
-  args <- names(formals(ddistname))
-  a<-allpar$a
-  b<-allpar$b
-  c<-allpar$c
-  extrpar<-list(a=a,b=b,c=c)
-  distparn<-setdiff(names(allpar),c("a","b"))
-  distpar<-allpar[distparn]
-  m <- match(distparn,args)
-  if (any(is.na(m)))
-    stop("you specified invalid names of parameters for ",distr)
-  return(list(extrpar=extrpar,distpar=distpar))
-}
 mgofGPG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")

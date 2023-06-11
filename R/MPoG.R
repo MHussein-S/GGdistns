@@ -1,4 +1,3 @@
-########## MPoG ########################
 dMPoG<-function (x,par,distr, log = FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
@@ -26,7 +25,6 @@ dMPoG<-function (x,par,distr, log = FALSE)
     d <- log(d)
   return(d)
 }
-
 pMPoG<-function (q,par,distr, lower.tail = TRUE, log.p = FALSE )
 {
   if(!is.list(par)|is.null(names(par)))
@@ -54,8 +52,7 @@ pMPoG<-function (q,par,distr, lower.tail = TRUE, log.p = FALSE )
     p <- log(p)
   return(p)
 }
-
-qMPoG<-function(p,par,distr,lower=0,upper,lower.tail=TRUE,log.p=FALSE)
+qMPoG<-function(p,par,distr,lower = 0,upper = 1e5,lower.tail = TRUE,log.p = FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
     stop("'par' must be a named list")
@@ -87,8 +84,8 @@ qMPoG<-function(p,par,distr,lower=0,upper,lower.tail=TRUE,log.p=FALSE)
   q<-c()
   for (pi in p)
   {
-    uni <- uniroot(f=qfun, p=pi, a=a,distpar=distpar, pdistname=pdistname,f.lower = -pi,f.upper = pi,lower = lower,upper = upper)$root
-    q<-c(q,uni)
+    uni <- uniroot(f=qfun, p=pi, a=a,distpar=distpar, pdistname=pdistname,f.lower = -pi,f.upper = pi,lower = lower,upper = upper,extendInt="yes")$root
+    q <- c(q,uni)
   }
   return(q)
 }
@@ -112,13 +109,13 @@ rMPoG<-function(n,par,distr)
   if (any(is.na(m)))
     stop("you specified invalid names of parameters for ",distr)
   y<-runif(n)
-  qMPoG(y,par,distr,lower=0,upper=100000)
+  qMPoG(y,par,distr)
 }
 
 mgofMPoG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")

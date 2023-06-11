@@ -1,1 +1,10 @@
 exportPattern("^[[:alpha:]]+")
+import(pracma)
+export(dMOG)
+export(pMOG)
+export(qMOG)
+export(rMOG)
+export(mgofMOG)
+importFrom("stats","dbeta","dgamma","constrOptim","pbeta","pgamma","uniroot","qbeta","qgamma","runif")
+importFrom("pracma","erf","erfinv")
+

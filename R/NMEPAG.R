@@ -1,4 +1,3 @@
-########## NMEPAG ########################
 dNMEPAG<-function (x,par,distr, log = FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
@@ -54,7 +53,7 @@ pNMEPAG<-function (q,par,distr, lower.tail = TRUE, log.p = FALSE )
     p <- log(p)
   return(p)
 }
-qNMEPAG<-function(p,par,distr,lower=0,upper,lower.tail=TRUE,log.p=FALSE)
+qNMEPAG<-function(p,par,distr,lower=0,upper=1e5,lower.tail=TRUE,log.p=FALSE)
 {
   if(!is.list(par)|is.null(names(par)))
     stop("'par' must be a named list")
@@ -101,7 +100,7 @@ rNMEPAG<-function(n,par,distr)
   apar<-match("a",names(par))
   if(is.na(apar))
     stop("the extra parameter 'a' is not specified")
-  args <- names(formals(ddistname))
+  args <- names(formals(qdistname))
   a<-par$a
   if (! a > 0)
     stop("NMEPAG distribution is only defined for a > 0")
@@ -111,13 +110,13 @@ rNMEPAG<-function(n,par,distr)
   if (any(is.na(m)))
     stop("you specified invalid names of parameters for ",distr)
   y<-runif(n)
-  qNMEPAG(y,par,distr,lower=0,upper=100000)
+  qNMEPAG(y,par,distr)
 }
 
 mgofNMEPAG<- function (data, distr, start,gofs = "CvM")
 {
   if(!is.numeric(start)|is.null(names(start))|any(names(start)==""))
-    stop("'start' must be a named numeric vector of the form 'c(name=val,name=val,...)'")
+    stop("'start' must be a named numeric vector'")
   if (!is.character(distr))
     stop("distr must be a character string naming the baseline distribution")
   ddistname <- paste("d",distr,sep="")
