@@ -11,10 +11,10 @@ install_github("MHussein-S/GGdistns")
 This will pull all the necessary functions for using the package.
 
 ##Additional information
-For more on the authors, maintainers and version history of GGdistns, please refer to the description file.
+For more on the author, maintainer and version history of GGdistns, please refer to the description file.
 
 ## License
 
-MIT
+GPL-3
 
-This project is licensed under the MIT License - see the license file for details.
+This project is licensed under the GPL-3 License - see the license file for details.
