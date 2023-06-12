@@ -112,11 +112,11 @@ rOPAG<-function(n,par,distr)
   do.call(qdistname,c(list(y), as.list(distpar)))
 }
 
-setpar<-function(ddistname,allpar)
+setpar<-function(distname,allpar)
 {
   if(!is.list(allpar))
     allpar<- as.list(allpar)
-  args <- names(formals(ddistname))
+  args <- names(formals(distname))
   a<-allpar$a
   b<-allpar$b
   c<-allpar$c
@@ -125,7 +125,7 @@ setpar<-function(ddistname,allpar)
   distpar<-allpar[distparn]
   m <- match(distparn,args)
   if (any(is.na(m)))
-    stop("you specified invalid names of parameters for ",ddistname)
+    stop("you specified invalid names of parameters for ",distname)
   return(list(extrpar=extrpar,distpar=distpar))
 }
 mgofOPAG<- function (data, distr, start,gofs = "CvM")

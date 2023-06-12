@@ -5,7 +5,11 @@ Version: 1.0
 Authors@R: person("Mohamed", "Hussein", email = "m.hussein@alexu.edu.eg",
   role = c("aut", "cre"),
   comment = c(ORCID = "0000-0002-7332-0334"))
-Description: For twenty-four generalized G distributions, find the maximum goodness-of-fit estimates of the distribution's parameters. Also computes the pdf, cdf, quantile and generates random deviates.
+Description: For twenty-four generalized G distributions, find the maximum goodness-of-fit estimates of the distribution's parameters. Also computes the pdf, cdf, and quantile in addition to generating random deviates.
 Encoding: UTF-8
 Imports: pracma
-License: MIT + file LICENSE
+License: GPL (>= 3)
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
