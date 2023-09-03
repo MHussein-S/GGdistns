@@ -4,7 +4,7 @@ These instructions will give you some basic instructions on installing the MAPfi
 
 ### Installing
 
-To install the MAPfit package from the GitHub repository, run the function 
+To install the GGdistns package from the GitHub repository, run the function 
 ```R
 install_github("MHussein-S/GGdistns")
 ```
