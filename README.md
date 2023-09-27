@@ -1,6 +1,6 @@
 # GGdistns: Maximum Goodness-of-fit Estimates of Generalize G Distributions
 ## Getting Started
-These instructions will give you some basic instructions on installing the MAPfit package and where to look for additional information. 
+These instructions will give you some basic instructions on installing the GGdistns package and where to look for additional information. 
 
 ### Installing
 
